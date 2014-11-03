@@ -15,12 +15,12 @@ class Player
   
   def move_right
     @x += 10
-    @x = 610 if @x >= 610
+    @x = 770 if @x >= 770
   end
   
   def move_down
     @y += 10
-    @y = 440 if @y >= 440
+    @y = 560 if @y >= 560
   end
   
   def move_up
@@ -29,6 +29,6 @@ class Player
   end
   
   def draw
-    @ship.draw_rot(@x, @y, 1, 0, 0.5, 0.5, 0.07, 0.075)
+    @ship.draw_rot(@x, @y, 1, 0, 0.5, 0.5, 0.08, 0.08)
   end
 end
