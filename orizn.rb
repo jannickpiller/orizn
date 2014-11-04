@@ -23,7 +23,6 @@ class Orizn < Gosu::Window
   end
   
   def update
-    # game logic
     @player.move_left if button_down? Gosu::KbLeft
     @player.move_right if button_down? Gosu::KbRight
     @player.move_down if button_down? Gosu::KbDown
@@ -48,7 +47,6 @@ class Orizn < Gosu::Window
   end
   
   def draw_start_screen
-    # draw_quad(0, 0, 0xff000000, 0, 600, 0xff262626, 800, 0, 0xff000000, 800, 600, 0xff262626, -Float::INFINITY)
     @background.draw(0, 0, 0)
     @title.draw("orizn:prototype", 245, 150, 1, 1.0, 1.0, 0xffffffee)
     @enter.draw("press enter", 325, 260, 1, 1.0, 1.0, 0xffffffee)
