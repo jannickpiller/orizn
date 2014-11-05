@@ -1,5 +1,6 @@
 class Player
   def initialize(window)
+    @window = window
     @ship = Gosu::Image.new(window, 'media/ship.png', false)
     @energy = Gosu::Image.new(window, 'media/glow.png', false)
     @x = @y = 0
@@ -31,6 +32,13 @@ class Player
   
   def draw
     @ship.draw_rot(@x, @y, 1, 0, 0.5, 0.5, 0.08, 0.08)
-    @energy.draw_rot(@x, @y+10, 2, 0.5, 0.5, 0.4, 0.4)
+    @energy.draw_rot(@x, @y+10, 0, 0.5, 0.5, 0.4, 0.4)
+  end
+  
+  def update
+    move_left if @window.button_down? Gosu::KbLeft
+    move_right if @window.button_down? Gosu::KbRight
+    move_down if @window.button_down? Gosu::KbDown
+    move_up if @window.button_down? Gosu::KbUp
   end
 end
