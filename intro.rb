@@ -1,10 +1,9 @@
-class Intro
+class Intro < Scene
   attr_reader :sample, :song
   
   def initialize(window)
+    super(window)
     @background = Gosu::Image.new(window, 'media/5bg.png', true)
-    @x = 0
-    @y = -1448
     @song = Gosu::Song.new(window, 'media/sci_fi_freak_out.mp3')
     
     vt323 = "media/VT323-Regular.ttf"
@@ -13,6 +12,7 @@ class Intro
     @made = Gosu::Font.new(window, vt323, 25)
     @gosu_logo = Gosu::Image.new(window, 'media/gosu_logo.png', false)
     @sample = Gosu::Sample.new(window, 'media/ambience-2.wav')
+    @player = false
   end
   
   def draw
@@ -23,12 +23,5 @@ class Intro
     @made.draw("made with", 610, 565, 1, 1.0, 1.0, 0xffffffee)
     @made.draw("@jpilr", 10, 565, 1, 1.0, 1.0, 0xff0066ff)
     @song.play
-  end
-  
-  def update
-    @y += 0.22
-    @x -= 0.07
-    @y = 0 if @y >= 0
-    @x = -1248 if @x < -1248
   end
 end

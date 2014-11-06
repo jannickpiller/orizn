@@ -1,8 +1,7 @@
-class Level
+class Level < Scene
   def initialize(window)
+    super(window)
     @background = Gosu::Image.new(window, 'media/5.png', true)
-    @x = 0
-    @y = -1448
     @song = Gosu::Song.new(window, 'media/through_space.ogg')
     @player = Player.new(window)
     @player.warp(400, 500)
@@ -10,8 +9,8 @@ class Level
   
   def draw
     @background.draw(@x, @y, 0)
-    @player.draw
     @song.play
+    @player.draw
   end
   
   def update
