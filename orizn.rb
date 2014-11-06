@@ -5,7 +5,6 @@ require_relative 'intro'
 require_relative 'level'
 
 class Orizn < Gosu::Window
-  
   def initialize
     super(800, 600, false)
     self.caption = "orizn:prototype"
@@ -30,10 +29,10 @@ class Orizn < Gosu::Window
     if @start == false
       @level.song.stop
       @level.sample.play
+      @level = Level.new(self)
     end
     
     @start = true
-    @level = Level.new(self)
   end
 end
 
