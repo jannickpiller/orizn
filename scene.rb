@@ -13,10 +13,12 @@ class Scene
   end
   
   def update(scrollspeed_x = 0.07, scrollspeed_y = 0.15)
-    @x -= scrollspeed_x
-    @y += scrollspeed_y
-    @x = -1248 if @x < -1248
-    @y = 0 if @y >= 0
+    if @background.nil? == false
+      @x -= scrollspeed_x
+      @y += scrollspeed_y
+      @x = -1248 if @x < -1248
+      @y = 0 if @y >= 0
+    end
     
     @player.update if @player.nil? == false
   end  
