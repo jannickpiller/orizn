@@ -1,16 +1,23 @@
 class Scene
   def initialize(window)
+    @player = Player.new(window)
+    @player.warp(400, 500)
     @x = 0
     @y = -1448
   end
   
   def draw
+    @background.draw(@x, @y, 0)
+    @song.play
+    @player.draw if @player.nil? == false
   end
   
-  def update
-    @y += 0.22
-    @x -= 0.07
-    @y = 0 if @y >= 0
+  def update(scrollspeed_x = 0.07, scrollspeed_y = 0.15)
+    @x -= scrollspeed_x
+    @y += scrollspeed_y
     @x = -1248 if @x < -1248
+    @y = 0 if @y >= 0
+    
+    @player.update if @player.nil? == false
   end  
 end

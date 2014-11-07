@@ -5,6 +5,7 @@ class Intro < Scene
     super(window)
     @background = Gosu::Image.new(window, 'media/5bg.png', true)
     @song = Gosu::Song.new(window, 'media/sci_fi_freak_out.mp3')
+    @player = nil
     
     vt323 = "media/VT323-Regular.ttf"
     @title = Gosu::Font.new(window, vt323, 60)
@@ -15,12 +16,16 @@ class Intro < Scene
   end
   
   def draw
-    @background.draw(@x, @y, 0)
+    super
+    
     @title.draw("orizn:prototype", 245, 150, 1, 1.0, 1.0, 0xffffffee)
     @enter.draw("press enter", 325, 260, 1, 1.0, 1.0, 0xffffffee)
     @gosu_logo.draw(700, 565, 0, 0.3, 0.3)
     @made.draw("made with", 610, 565, 1, 1.0, 1.0, 0xffffffee)
     @made.draw("@jpilr", 10, 565, 1, 1.0, 1.0, 0xff0066ff)
-    @song.play
+  end
+  
+  def update
+    super(0.07, 0.22)
   end
 end
