@@ -12,7 +12,6 @@ class Intro < Scene
     @made = Gosu::Font.new(window, vt323, 25)
     @gosu_logo = Gosu::Image.new(window, 'media/gosu_logo.png', false)
     @sample = Gosu::Sample.new(window, 'media/ambience-2.wav')
-    @player = false
   end
   
   def draw
