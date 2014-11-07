@@ -7,8 +7,8 @@ class Scene
   end
   
   def draw
-    @background.draw(@x, @y, 0)
-    @song.play
+    @background.draw(@x, @y, 0) if @background.nil? == false
+    @song.play if @song.nil? == false
     @player.draw if @player.nil? == false
   end
   
