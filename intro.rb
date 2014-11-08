@@ -18,11 +18,11 @@ class Intro < Scene
   def draw
     super
     
-    @title.draw("orizn:prototype", 245, 150, 1, 1.0, 1.0, 0xffffffee)
-    @enter.draw("press enter", 325, 260, 1, 1.0, 1.0, 0xffffffee)
-    @gosu_logo.draw(700, 565, 0, 0.3, 0.3)
-    @made.draw("made with", 610, 565, 1, 1.0, 1.0, 0xffffffee)
-    @made.draw("@jpilr", 10, 565, 1, 1.0, 1.0, 0xff0066ff)
+    @title.draw("orizn:prototype", 245, 150, UI, 1.0, 1.0, 0xffffffee)
+    @enter.draw("press enter", 325, 260, UI, 1.0, 1.0, 0xffffffee)
+    @gosu_logo.draw(700, 565, UI, 0.3, 0.3)
+    @made.draw("made with", 610, 565, UI, 1.0, 1.0, 0xffffffee)
+    @made.draw("@jpilr", 10, 565, UI, 1.0, 1.0, 0xff0066ff)
   end
   
   def update
