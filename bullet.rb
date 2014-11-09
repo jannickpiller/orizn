@@ -26,7 +26,7 @@ class Bullet
   def draw
     if @player.shooting
       @bullet_img.draw_rot(@x, @y, WEAPON, 0.5, 0.5, 0.4, 0.4)
-      @sample.play(0.5)
+      @sample.play(0.1)
     end
   end 
 end
