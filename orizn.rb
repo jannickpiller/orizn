@@ -1,6 +1,7 @@
 require 'gosu'
 
 require_relative 'player'
+require_relative 'bullet'
 require_relative 'scene'
 require_relative 'intro'
 require_relative 'level'
