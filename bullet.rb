@@ -1,22 +1,17 @@
 class Bullet
-  attr_reader :sample, :x, :y
+  attr_reader :sample
   
   def initialize(player, window)
+    @bullet_img = Gosu::Image.new(window, "media/bullet.png", false)
+    @sample = Gosu::Sample.new(window, "media/phaserDown3.mp3")
     @player = player
-    @window = window
     @x = @player.x
     @y = @player.y
-    @bullet_img = Gosu::Image.new(@window, "media/bullet.png", true)
-    @sample = Gosu::Sample.new(window, "media/phaserDown3.mp3")
   end
   
   def update
     if @player.shooting
-      # @y -= 20
-      @y -= 2
-      if @y < 0
-        @player.shooting = false
-      end
+      @y -= 20
     else
       @x = @player.x
       @y = @player.y
@@ -24,9 +19,6 @@ class Bullet
   end
   
   def draw
-    if @player.shooting
-      @bullet_img.draw_rot(@x, @y, WEAPON, 0.5, 0.5, 0.4, 0.4)
-      @sample.play(0.1)
-    end
+    @bullet_img.draw_rot(@x, @y, WEAPON, 0.5, 0.5, 0.35, 0.35)
   end 
 end
