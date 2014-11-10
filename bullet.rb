@@ -12,6 +12,7 @@ class Bullet
   def update
     if @player.shooting
       @y -= 20
+      @player.shooting = false if @y < 0
     else
       @x = @player.x
       @y = @player.y

@@ -1,11 +1,12 @@
 class Player
-  attr_reader :shooting, :x, :y
+  attr_accessor :shooting
+  attr_reader :x, :y
   
   def initialize(window)
     @window = window
     @ship = Gosu::Image.new(window, 'media/ship.png', false)
     @energy = Gosu::Image.new(window, 'media/glow.png', false)
-    @bullets = Array.new
+    @bullet = Bullet.new(self, window)
     @shooting = false
     @x = 0
     @y = 0
@@ -36,15 +37,14 @@ class Player
   end
   
   def shoot
-    @bullets.push(Bullet.new(self, @window))
     @shooting = true
-    @bullets.each { |bullet| bullet.sample.play(0.1) }
+    @bullet.sample.play(0.5)
   end
   
   def draw
     @ship.draw_rot(@x, @y, PLAYER, 0, 0.5, 0.5, 0.08, 0.08)
     @energy.draw_rot(@x, @y+10, BGFX, 0.5, 0.5, 0.4, 0.4)
-    @bullets.each { |bullet| bullet.draw }
+    @bullet.draw if @shooting == true
   end
   
   def update
@@ -53,6 +53,6 @@ class Player
     move_down if @window.button_down? Gosu::KbDown
     move_up if @window.button_down? Gosu::KbUp
     shoot if @window.button_down? Gosu::KbSpace
-    @bullets.each { |bullet| bullet.update }
+    @bullet.update
   end
 end
