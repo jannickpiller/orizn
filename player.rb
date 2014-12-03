@@ -32,7 +32,7 @@ class Player
   end
   
   def draw
-    @ship.draw_rot(@x, @y, ENTITY, 0, 0.5, 0.5, 0.08, 0.08)
+    @ship.draw_rot(@x, @y, PLAYER, 0, 0.5, 0.5, 0.08, 0.08)
     @energy.draw_rot(@x, @y+10, BGFX, 0.5, 0.5, 0.4, 0.4)
   end
   
