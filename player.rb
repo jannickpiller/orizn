@@ -3,6 +3,7 @@ class Player
     @window = window
     @ship = Gosu::Image.new(window, 'media/ship.png', false)
     @energy = Gosu::Image.new(window, 'media/glow.png', false)
+    @bullet = Bullet.new(self, window)
     @x = 0
     @y = 0
   end
@@ -31,9 +32,14 @@ class Player
     @y = 40 if @y <= 40
   end
   
+  def shoot
+    @bullet.shooted = true
+  end
+  
   def draw
     @ship.draw_rot(@x, @y, PLAYER, 0, 0.5, 0.5, 0.08, 0.08)
     @energy.draw_rot(@x, @y+10, BGFX, 0.5, 0.5, 0.4, 0.4)
+    @bullet.draw
   end
   
   def update
@@ -41,5 +47,8 @@ class Player
     move_right if @window.button_down? Gosu::KbRight
     move_down if @window.button_down? Gosu::KbDown
     move_up if @window.button_down? Gosu::KbUp
+    shoot if @window.button_down? Gosu::KbSpace
+    
+    @bullet.update
   end
 end

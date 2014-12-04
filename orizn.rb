@@ -5,6 +5,7 @@ require_relative 'scene'
 require_relative 'intro'
 require_relative 'level'
 require_relative 'zorder'
+require_relative 'bullet'
 
 include ZOrder
 
