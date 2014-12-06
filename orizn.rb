@@ -7,6 +7,7 @@ require_relative 'intro'
 require_relative 'level'
 require_relative 'zorder'
 require_relative 'bullet'
+require_relative 'enemy'
 
 include ZOrder
 

@@ -1,5 +1,5 @@
 class Player
-  attr_reader :x, :y
+  attr_reader :x, :y, :bullets
   
   def initialize(window)
     @window = window

@@ -6,6 +6,7 @@ class Intro < Scene
     @background = Gosu::Image.new(window, 'media/5bg.png', true)
     @song = Gosu::Song.new(window, 'media/sci_fi_freak_out.mp3')
     @player = nil
+    @enemy = nil
     
     vt323 = "media/VT323-Regular.ttf"
     @title = Gosu::Font.new(window, vt323, 60)
