@@ -1,4 +1,5 @@
 class Scene
+  attr_reader :player
   def initialize(window)
     @player = Player.new(window)
     @player.warp(400, 500)

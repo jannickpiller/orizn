@@ -6,6 +6,7 @@ require_relative 'scene'
 require_relative 'intro'
 require_relative 'level'
 require_relative 'zorder'
+require_relative 'bullet'
 
 include ZOrder
 
@@ -28,6 +29,7 @@ class Orizn < Gosu::Window
   def button_down(id)
     close if id == Gosu::KbEscape
     press_enter if id == Gosu::KbReturn
+    @level.player.button_down(id)
   end
   
   def press_enter
