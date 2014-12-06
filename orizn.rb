@@ -28,6 +28,7 @@ class Orizn < Gosu::Window
   def button_down(id)
     close if id == Gosu::KbEscape
     press_enter if id == Gosu::KbReturn
+    @level.player.button_down(id)
   end
   
   def press_enter
