@@ -1,17 +1,20 @@
 class Player
-  attr_reader :x, :y, :bullets
+  attr_reader :x, :y
   
   def initialize(window)
     @window = window
     @ship = Gosu::Image.new(window, 'media/ship.png', false)
     @energy = Gosu::Image.new(window, 'media/glow.png', false)
-    @bullets = Array.new(5) { Bullet.new(self, window) }
     @x = 0
     @y = 0
   end
   
   def warp(x, y)
     @x, @y = x, y
+  end
+  
+  def load_bullets(bullets)
+    @bullets = bullets
   end
   
   def move_left
@@ -49,7 +52,6 @@ class Player
   def draw
     @ship.draw_rot(@x, @y, PLAYER, 0, 0.5, 0.5, 0.08, 0.08)
     @energy.draw_rot(@x, @y+10, BGFX, 0.5, 0.5, 0.4, 0.4)
-    @bullets.each { |bullet| bullet.draw }
   end
   
   def update
@@ -57,7 +59,5 @@ class Player
     move_right if @window.button_down? Gosu::KbRight
     move_down if @window.button_down? Gosu::KbDown
     move_up if @window.button_down? Gosu::KbUp
-
-    @bullets.each { |bullet| bullet.update }
   end
 end

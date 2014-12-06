@@ -1,9 +1,5 @@
 class Scene
-  attr_reader :player
   def initialize(window)
-    @player = Player.new(window)
-    @enemy = Enemy.new(window)
-    @player.warp(400, 500)
     @x = 0
     @y = -1448
   end
@@ -11,8 +7,6 @@ class Scene
   def draw
     @background.draw(@x, @y, BACKGROUND) if @background.nil? == false
     @song.play if @song.nil? == false
-    @player.draw if @player.nil? == false
-    @enemy.draw if @enemy.nil? == false
   end
   
   def update(scrollspeed_x = 0.07, scrollspeed_y = 0.15)
@@ -22,8 +16,5 @@ class Scene
       @x = -1248 if @x < -1248
       @y = 0 if @y >= 0
     end
-    
-    @player.update if @player.nil? == false
-    @enemy.update if @enemy.nil? == false
   end  
 end
