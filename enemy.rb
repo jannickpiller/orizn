@@ -9,7 +9,7 @@ class Enemy
     @x = rand(@window.width)
     @x = 770 if @x >= 770
     @x = 30 if @x <= 30
-    @y = rand(-5000..0)
+    @y = rand(-2500..0)
   end
   
   def hit_by?(bullets)
