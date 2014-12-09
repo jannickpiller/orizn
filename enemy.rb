@@ -9,7 +9,7 @@ class Enemy
     @x = rand(@window.width)
     @x = 770 if @x >= 770
     @x = 30 if @x <= 30
-    @y = 0
+    @y = rand(-5000..0)
   end
   
   def hit_by?(bullets)
@@ -20,22 +20,24 @@ class Enemy
       @bullet.shot = false
       if @health == 0
         @health = 2
-        @y = 0
-        @x = rand(@window.width)
-        @x = 770 if @x >= 770
-        @x = 30 if @x <= 30
+        reset_position
       end
     end
   end
   
+  def reset_position
+    @x = rand(@window.width)
+    @x = 770 if @x >= 770
+    @x = 30 if @x <= 30
+    @y = rand(-5000..0)
+  end
+  
   def update
+    #if @health > 0
     @y += 3
-    if @y > @window.width
-      @y = 0
-      @x = rand(@window.width)
-      @x = 770 if @x >= 770
-      @x = 30 if @x <= 30    
-    end
+    #if @y > @window.width or @health == 0
+     # reset_position
+    # end    
   end
     
   def draw

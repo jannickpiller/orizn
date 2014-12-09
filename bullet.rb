@@ -2,13 +2,13 @@ class Bullet
   attr_reader :sample, :x, :y
   attr_accessor :shot
   
-  def initialize(player, window)
+  def initialize(entity, window)
     @bullet_img = Gosu::Image.new(window, "media/bullet.png", false)
     @sample = Gosu::Sample.new(window, "media/phaserDown3.mp3")
     @shot = false
-    @player = player
-    @x = @player.x
-    @y = @player.y
+    @entity = entity
+    @x = @entity.x
+    @y = @entity.y
   end
   
   def update
@@ -18,8 +18,8 @@ class Bullet
         @shot = false
       end
     else
-      @x = @player.x
-      @y = @player.y
+      @x = @entity.x
+      @y = @entity.y
     end
   end
   

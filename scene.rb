@@ -2,6 +2,7 @@ class Scene
   def initialize(window)
     @x = 0
     @y = -1448
+    @vt323 = "media/VT323-Regular.ttf"
   end
   
   def draw
