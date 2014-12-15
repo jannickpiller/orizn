@@ -1,10 +1,11 @@
 class Player
-  attr_reader :x, :y
+  attr_reader :x, :y, :health
   
   def initialize(window)
     @window = window
     @ship = Gosu::Image.new(window, 'media/ship.png', false)
     @energy = Gosu::Image.new(window, 'media/glow.png', false)
+    @health = 100
     @x = 0
     @y = 0
   end
@@ -42,6 +43,13 @@ class Player
     if bullet
       bullet.shot = true
       bullet.sample.play
+    end
+  end
+  
+  def touched_by?(enemies)
+    @touched = enemies.any? { |enemy| Gosu::distance(enemy.x, enemy.y, @x, @y) < 15 }
+    if @touched
+      @health -= 1
     end
   end
   

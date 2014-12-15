@@ -42,6 +42,10 @@ class Orizn < Gosu::Window
       @level = Level.new(self)
     end
     
+    if @level.gameover == true
+      @level = Level.new(self)
+    end
+    
     @start = true
   end
 end
