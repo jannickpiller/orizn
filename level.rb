@@ -16,6 +16,10 @@ class Level < Scene
     @player.load_bullets(@bullets)
     
     @enemies = Array.new(15) { Enemy.new(window) }
+    @enemies.each do |enemy|
+      @enemy_bullets = Array.new(5) { EnemyBullet.new(enemy, window) }
+      enemy.load_bullets(@enemy_bullets)
+    end
     @gameover = false
   end
   
@@ -34,6 +38,7 @@ class Level < Scene
       @bullets.each { |bullet| bullet.draw }
     
       @enemies.each { |enemy| enemy.draw }
+      @enemy_bullets.each { |enemy_bullet| enemy_bullet.draw }
     end
   end
   
@@ -45,19 +50,27 @@ class Level < Scene
       @bullets.each { |bullet| bullet.update }
 
       @enemies.each { |enemy| enemy.update }
+      @enemy_bullets.each { |enemy_bullet| enemy_bullet.update }
       @enemies.each { |enemy| enemy.hit_by? @bullets }
+      
       @player.touched_by? @enemies
     
       @enemies.each do |enemy| 
+        
         if enemy.hit_by?(@bullets)
           @enemies.delete(enemy)
           @score += 1
         end
       
-        if enemy.y > @window.width
+        if enemy.y > @window.height
           @enemies.delete(enemy)
           @score -=1
         end
+        
+        if enemy.x - @player.x < 10 and enemy.y < 10
+          enemy.shoot
+        end
+        
       end
     else
       @gameover = true

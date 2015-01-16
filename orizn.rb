@@ -8,6 +8,7 @@ require_relative 'level'
 require_relative 'zorder'
 require_relative 'bullet'
 require_relative 'enemy'
+require_relative 'enemy_bullet'
 
 include ZOrder
 

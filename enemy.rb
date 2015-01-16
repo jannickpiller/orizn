@@ -12,6 +12,18 @@ class Enemy
     @y = rand(-2500..0)
   end
   
+  def load_bullets(bullets)
+    @bullets = bullets
+  end
+  
+  def shoot
+    bullet = @bullets.find { |bullet| not bullet.shot } 
+    if bullet
+      bullet.shot = true
+      bullet.sample.play
+    end
+  end
+  
   def hit_by?(bullets)
     @hit = bullets.any? { |bullet| Gosu::distance(bullet.x, bullet.y, @x, @y) < 30 }
     @bullet = bullets.find { |bullet| bullet.shot }
