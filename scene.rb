@@ -3,6 +3,7 @@ class Scene
     @x = 0
     @y = -1448
     @vt323 = "media/VT323-Regular.ttf"
+    @robotobold = "media/Roboto-Bold.ttf"
   end
   
   def draw
