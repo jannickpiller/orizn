@@ -1,12 +1,12 @@
 require 'gosu'
 
-require_relative 'player'
-require_relative 'bullet'
-require_relative 'scene'
-require_relative 'intro'
-require_relative 'level'
-require_relative 'bullet'
-require_relative 'enemy'
+require_relative 'lib/player'
+require_relative 'lib/bullet'
+require_relative 'lib/scene'
+require_relative 'lib/intro'
+require_relative 'lib/level'
+require_relative 'lib/bullet'
+require_relative 'lib/enemy'
 
 require_relative 'modules/zorder'
 
