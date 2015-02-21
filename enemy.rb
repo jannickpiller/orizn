@@ -3,7 +3,7 @@ class Enemy
   
   def initialize(window)
     @window = window
-    @ship = Gosu::Image.new(window, 'media/enemy.png', false)
+    @ship = Gosu::Image.new(window, 'media/ships/enemy.png', false)
     @hit = false
     @health = 2
     @x = rand(@window.width)
@@ -41,6 +41,6 @@ class Enemy
   end
     
   def draw
-    @ship.draw_rot(@x, @y, ENEMY, 0, 0.5, 0.5, 0.8, 0.8)
+    @ship.draw_rot(@x, @y, ENEMY, 0, 0.5, 0.5, 0.5, 0.5)
   end
 end

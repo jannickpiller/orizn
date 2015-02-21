@@ -3,8 +3,8 @@ class Bullet
   attr_accessor :shot
   
   def initialize(entity, window)
-    @bullet_img = Gosu::Image.new(window, "media/bullet.png", false)
-    @sample = Gosu::Sample.new(window, "media/phaserDown3.mp3")
+    @bullet_img = Gosu::Image.new(window, "media/gfx/bullet.png", false)
+    @sample = Gosu::Sample.new(window, "media/sfx/phaserDown3.mp3")
     @shot = false
     @entity = entity
     @x = @entity.x
@@ -25,7 +25,7 @@ class Bullet
   
   def draw
     if @shot
-      @bullet_img.draw_rot(@x, @y, WEAPON, 0.5, 0.5, 0.35, 0.35)
+      @bullet_img.draw_rot(@x, @y, WEAPON, 0.5, 0.5, 0.5, 0.5)
     end
   end 
 end

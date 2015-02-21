@@ -3,8 +3,8 @@ class Player
   
   def initialize(window)
     @window = window
-    @ship = Gosu::Image.new(window, 'media/ship.png', false)
-    @energy = Gosu::Image.new(window, 'media/glow.png', false)
+    @ship = Gosu::Image.new(window, 'media/ships/player.png', false)
+    @energy = Gosu::Image.new(window, 'media/gfx/glow.png', false)
     @health = 100
     @x = 0
     @y = 0
@@ -58,7 +58,7 @@ class Player
   end
   
   def draw
-    @ship.draw_rot(@x, @y, PLAYER, 0, 0.5, 0.5, 0.08, 0.08)
+    @ship.draw_rot(@x, @y, PLAYER, 0, 0.5, 0.5, 0.5, 0.5)
     @energy.draw_rot(@x, @y+10, BGFX, 0.5, 0.5, 0.4, 0.4)
   end
   
