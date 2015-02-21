@@ -3,13 +3,15 @@ class Enemy
   
   def initialize(window)
     @window = window
-    @ship = Gosu::Image.new(window, 'media/ships/enemy.png', false)
-    @hit = false
+    @ship   = Gosu::Image.new(window, 'media/ships/enemy.png', false)
+    @hit    = false
     @health = 2
-    @x = rand(@window.width)
-    @x = 770 if @x >= 770
-    @x = 30 if @x <= 30
-    @y = rand(-2500..0)
+    
+    @x      = rand(@window.width)
+    @x      = 770 if @x >= 770
+    @x      = 30 if @x <= 30
+    
+    @y      = rand(-2500..0)
   end
   
   def hit_by?(bullets)

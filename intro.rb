@@ -3,11 +3,11 @@ class Intro < Scene
   
   def initialize(window)
     super(window)
-    @background = Gosu::Image.new(window, 'media/backgrounds/intro.png', true)
-    @song = Gosu::Song.new(window, 'media/music/sci_fi_freak_out.mp3')
-    @press_enter = Gosu::Font.new(window, @robotobold, 27)
-    @logo = Gosu::Image.new(window, 'media/interface/logo.png', false)
-    @sample = Gosu::Sample.new(window, 'media/sfx/ambience-2.wav')
+    @background   = Gosu::Image.new(window, 'media/backgrounds/intro.png', true)
+    @song         = Gosu::Song.new(window, 'media/music/sci_fi_freak_out.mp3')
+    @press_enter  = Gosu::Font.new(window, @robotobold, 27)
+    @logo         = Gosu::Image.new(window, 'media/interface/logo.png', false)
+    @sample       = Gosu::Sample.new(window, 'media/sfx/ambience-2.wav')
   end
   
   def draw

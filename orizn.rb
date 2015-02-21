@@ -16,8 +16,8 @@ class Orizn < Gosu::Window
   def initialize
     super(800, 600, false)
     self.caption = "orizn:prototype"
-    @level = Intro.new(self)
-    @start = false
+    @level       = Intro.new(self)
+    @start       = false
   end
   
   def update
@@ -31,10 +31,12 @@ class Orizn < Gosu::Window
   def button_down(id)
     close if id == Gosu::KbEscape
     press_enter if id == Gosu::KbReturn
+    
     if id == Gosu::KbM
       @level = Intro.new(self)
       @start = false
     end
+    
     if @level.instance_of? Level
       @level.player.button_down(id)
     end

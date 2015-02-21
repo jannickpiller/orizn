@@ -3,23 +3,21 @@ class Level < Scene
   
   def initialize(window)
     super(window)
-    @window = window
+    @window     = window
     @background = Gosu::Image.new(window, 'media/backgrounds/game.png', true)
-    @hud = Gosu::Image.new(window, 'media/interface/hud.png', true)
-    @score_bar = Gosu::Image.new(window, 'media/interface/score_bar.png', true)
-    @font = Gosu::Font.new(window, @robotobold, 30)
-    @bigfont = Gosu::Font.new(window, @robotobold, 60)
-    @song = Gosu::Song.new(window, 'media/music/through_space.ogg')
-    @score = 0
+    @hud        = Gosu::Image.new(window, 'media/interface/hud.png', true)
+    @score_bar  = Gosu::Image.new(window, 'media/interface/score_bar.png', true)
+    @font       = Gosu::Font.new(window, @robotobold, 30)
+    @bigfont    = Gosu::Font.new(window, @robotobold, 60)
+    @song       = Gosu::Song.new(window, 'media/music/through_space.ogg')
+    @score      = 0
+    @player     = Player.new(window)
+    @bullets    = Array.new(5) { Bullet.new(@player, window) }
+    @enemies    = Array.new(15) { Enemy.new(window) }
+    @gameover   = false
     
-    @player = Player.new(window)
     @player.warp(400, 500)
-
-    @bullets = Array.new(5) { Bullet.new(@player, window) }
     @player.load_bullets(@bullets)
-    
-    @enemies = Array.new(15) { Enemy.new(window) }
-    @gameover = false
   end
   
   def draw
@@ -41,7 +39,6 @@ class Level < Scene
       @font.draw("#{@player.health}", 745, 15, UI, 0.9, 1.0, 0xffbe973c)
       @player.draw
       @bullets.each { |bullet| bullet.draw }
-    
       @enemies.each { |enemy| enemy.draw }
     end
   end
@@ -51,12 +48,13 @@ class Level < Scene
     
     unless @enemies.empty? or @player.health == 0
       @player.update
+      @player.touched_by? @enemies
+      
       @bullets.each { |bullet| bullet.update }
 
       @enemies.each { |enemy| enemy.update }
       @enemies.each { |enemy| enemy.hit_by? @bullets }
-      @player.touched_by? @enemies
-    
+      
       @enemies.each do |enemy| 
         if enemy.hit_by?(@bullets)
           @enemies.delete(enemy)

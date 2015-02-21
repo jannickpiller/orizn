@@ -3,11 +3,11 @@ class Player
   
   def initialize(window)
     @window = window
-    @ship = Gosu::Image.new(window, 'media/ships/player.png', false)
+    @ship   = Gosu::Image.new(window, 'media/ships/player.png', false)
     @energy = Gosu::Image.new(window, 'media/gfx/glow.png', false)
     @health = 100
-    @x = 0
-    @y = 0
+    @x      = 0
+    @y      = 0
   end
   
   def warp(x, y)
@@ -63,9 +63,9 @@ class Player
   end
   
   def update
-    move_left if @window.button_down? Gosu::KbLeft
-    move_right if @window.button_down? Gosu::KbRight
-    move_down if @window.button_down? Gosu::KbDown
-    move_up if @window.button_down? Gosu::KbUp
+    move_left   if @window.button_down? Gosu::KbLeft
+    move_right  if @window.button_down? Gosu::KbRight
+    move_down   if @window.button_down? Gosu::KbDown
+    move_up     if @window.button_down? Gosu::KbUp
   end
 end
