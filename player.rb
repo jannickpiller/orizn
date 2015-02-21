@@ -46,9 +46,10 @@ class Player
     end
   end
   
-  def touched_by?(enemies)
-    @touched = enemies.any? { |enemy| Gosu::distance(enemy.x, enemy.y, @x, @y) < 15 }
-    if @touched
+  def touched_by?(enemy)
+    # @touched = enemies.any? { |enemy| Gosu::distance(enemy.x, enemy.y, @x, @y) < 15 }
+    @touched = Gosu::distance(enemy.x, enemy.y, @x, @y) < 15 
+    if @touched == true
       @health -= 1
     end
   end

@@ -1,7 +1,7 @@
 class Scene
   def initialize(window)
-    @x = 0
-    @y = -1448
+    @x          = 0
+    @y          = -1448
     @robotobold = "media/fonts/Roboto-Bold.ttf"
   end
   
