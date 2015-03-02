@@ -13,11 +13,16 @@ class Level < Scene
     @score      = 0
     @player     = Player.new(window)
     @bullets    = Array.new(5) { Bullet.new(@player, window) }
-    @enemies    = Array.new(15) { Enemy.new(window) }
+    @enemies    = Array.new(5) { Enemy.new(window, @player) } 
     @gameover   = false
     
     @player.warp(400, 500)
     @player.load_bullets(@bullets)
+    
+    @enemies.each { |enemy|
+      enemy.bullets = Array.new(5) { Bullet.new(enemy, window) } 
+      enemy.load_bullets(enemy.bullets) 
+    }  
   end
   
   def draw
@@ -37,9 +42,14 @@ class Level < Scene
       @font.draw("#{@score}", 611, 15, UI, 0.9, 1.0, 0xffbe973c)
       @font.draw("HEALTH", 655, 15, UI, 1.0, 1.0, 0xffbe973c)
       @font.draw("#{@player.health}", 745, 15, UI, 0.9, 1.0, 0xffbe973c)
+      
       @player.draw
       @bullets.each { |bullet| bullet.draw }
-      @enemies.each { |enemy| enemy.draw }
+      
+      @enemies.each do |enemy| 
+        enemy.draw
+        enemy.bullets.each { |bullet| bullet.draw }
+      end
     end
   end
   
@@ -48,14 +58,13 @@ class Level < Scene
     
     unless @enemies.empty? or @player.health == 0
       @player.update
+      @bullets.each { |bullet| bullet.update }
       @player.touched_by? @enemies
       
-      @bullets.each { |bullet| bullet.update }
-
-      @enemies.each { |enemy| enemy.update }
-      @enemies.each { |enemy| enemy.hit_by? @bullets }
-      
-      @enemies.each do |enemy| 
+      @enemies.each do |enemy|
+        enemy.update
+        enemy.bullets.each { |bullet| bullet.update }
+         
         if enemy.hit_by?(@bullets)
           @enemies.delete(enemy)
           @score += 1
@@ -64,6 +73,10 @@ class Level < Scene
         if enemy.y > @window.width
           @enemies.delete(enemy)
           @score -=1
+        end
+        
+        if (enemy.x - @player.x).abs < 10
+          enemy.shoot
         end
       end
     else

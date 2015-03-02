@@ -7,19 +7,31 @@ class Bullet
     @sample     = Gosu::Sample.new(window, "media/sfx/phaserDown3.mp3")
     @shot       = false
     @entity     = entity
-    @x          = @entity.x
-    @y          = @entity.y
+    @x          = entity.x
+    @y          = entity.y
   end
   
   def update
-    if @shot
-      @y -= 15
-      if @y < 0
-        @shot = false
+    if @entity.instance_of? Player
+      if @shot
+        @y -= 15
+        if @y < 0
+          @shot = false
+        end
+      else
+        @x = @entity.x
+        @y = @entity.y
       end
     else
-      @x = @entity.x
-      @y = @entity.y
+      if @shot
+        @y += 25
+        if @y > 600
+          @shot = false
+        end
+      else
+        @x = @entity.x
+        @y = @entity.y
+      end
     end
   end
   
