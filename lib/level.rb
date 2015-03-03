@@ -12,7 +12,7 @@ class Level < Scene
     @song       = Gosu::Song.new(window, 'media/music/through_space.ogg')
     @score      = 0
     @player     = Player.new(window)
-    @bullets    = Array.new(5) { Bullet.new(@player, window) }
+    @bullets    = Array.new(5) { PlayerBullet.new(@player, window) }
     @enemies    = Array.new(5) { Enemy.new(window, @player) } 
     @gameover   = false
     
@@ -20,7 +20,7 @@ class Level < Scene
     @player.load_bullets(@bullets)
     
     @enemies.each { |enemy|
-      enemy.bullets = Array.new(5) { Bullet.new(enemy, window) } 
+      enemy.bullets = Array.new(5) { EnemyBullet.new(enemy, window) } 
       enemy.load_bullets(enemy.bullets) 
     }  
   end
@@ -64,6 +64,7 @@ class Level < Scene
       @enemies.each do |enemy|
         enemy.update
         enemy.bullets.each { |bullet| bullet.update }
+        @player.hit_by? enemy.bullets
          
         if enemy.hit_by?(@bullets)
           @enemies.delete(enemy)
@@ -75,7 +76,7 @@ class Level < Scene
           @score -=1
         end
         
-        if (enemy.x - @player.x).abs < 10
+        if (enemy.x - @player.x).abs < 150 and enemy.y >= -5
           enemy.shoot
         end
       end

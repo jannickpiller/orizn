@@ -45,7 +45,7 @@ class Enemy
     return if @delay > 0
     bullet = @bullets.find { |bullet| not bullet.shot } 
     if bullet
-      @delay = 60
+      @delay = 30
       bullet.shot = true
       bullet.sample.play
     end

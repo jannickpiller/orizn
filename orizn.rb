@@ -6,6 +6,8 @@ require_relative 'lib/scene'
 require_relative 'lib/intro'
 require_relative 'lib/level'
 require_relative 'lib/bullet'
+require_relative 'lib/player_bullet'
+require_relative 'lib/enemy_bullet'
 require_relative 'lib/enemy'
 
 require_relative 'modules/zorder'

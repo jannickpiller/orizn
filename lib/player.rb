@@ -18,6 +18,15 @@ class Player
     @bullets = bullets
   end
   
+  def hit_by?(bullets)
+    @hit = bullets.any? { |bullet| Gosu::distance(bullet.x, bullet.y, @x, @y) < 30 }
+    @bullet = bullets.find { |bullet| bullet.shot }
+    if @hit and @bullet
+      @health -= 10
+      @bullet.shot = false
+    end
+  end
+  
   def move_left
     @x -= 10
     @x = 30 if @x <= 30
