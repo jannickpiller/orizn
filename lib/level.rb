@@ -26,38 +26,44 @@ class Level < Scene
     }  
   end
   
+  def gameover
+    if @enemies.empty? or @player.health == 0
+      @gameover = true
+    end
+  end
+  
   def draw
     super
     
-    if @enemies.empty? or @player.health == 0
-      @bigfont.draw("GAME OVER", 240, 100, UI, 1.5, 1.0, 0xffbe973c)
+    unless gameover
+      @hud.draw(514, 19, UI, 0.5, 0.5)
+      @font.draw("SCORE", 534, 15, UI, 1.0, 1.0, 0xffbe973c)
+      @font.draw("#{@score}", 611, 15, UI, 0.9, 1.0, 0xffbe973c)
+      @font.draw("HEALTH", 655, 15, UI, 1.0, 1.0, 0xffbe973c)
+      @font.draw("#{@player.health}", 745, 15, UI, 0.9, 1.0, 0xffbe973c)
+    
+      @player.draw
+      @bullets.each { |bullet| bullet.draw }
+    
+      @enemies.each do |enemy| 
+        enemy.draw
+        enemy.bullets.each { |bullet| bullet.draw }
+      end
+    else
+      @bigfont.draw("GAME OVER", 250, 100, UI, 1.5, 1.0, 0xffbe973c)
       @score_bar.draw(0, 200, UI, 0.5, 0.5)
       @font.draw("SCORE", 290, 201, UI, 1.0, 1.0, 0xff000000)
       @font.draw("#{@score}", 470, 201, UI, 1.0, 1.0, 0xff000000)
       @font.draw("PRESS ENTER TO START AGAIN", 260, 320, UI, 1.0, 1.0, 0xffc5a352)
       @font.draw("PRESS 'M' TO GO TO THE START SCREEN", 220, 380, UI, 1.0, 1.0, 0xffecd298)
       @font.draw("PRESS ESC TO QUIT", 305, 440, UI, 1.0, 1.0, 0xffeadcbb)
-    else
-      @hud.draw(514, 19, UI, 0.5, 0.5)
-      @font.draw("SCORE", 534, 15, UI, 1.0, 1.0, 0xffbe973c)
-      @font.draw("#{@score}", 611, 15, UI, 0.9, 1.0, 0xffbe973c)
-      @font.draw("HEALTH", 655, 15, UI, 1.0, 1.0, 0xffbe973c)
-      @font.draw("#{@player.health}", 745, 15, UI, 0.9, 1.0, 0xffbe973c)
-      
-      @player.draw
-      @bullets.each { |bullet| bullet.draw }
-      
-      @enemies.each do |enemy| 
-        enemy.draw
-        enemy.bullets.each { |bullet| bullet.draw }
-      end
     end
   end
   
   def update
     super(0.2, 0.25)
     
-    unless @enemies.empty? or @player.health == 0
+    unless gameover
       @player.update
       @bullets.each { |bullet| bullet.update }
       
@@ -87,8 +93,6 @@ class Level < Scene
           enemy.shoot
         end
       end
-    else
-      @gameover = true
     end
   end
 end
