@@ -1,9 +1,8 @@
 module ZOrder
   BACKGROUND = 0
   BGFX = 1
-  ENEMY = 2
-  WEAPON = 3
-  PLAYER = 4
-  FGFX = 5
-  UI = 6
+  WEAPON = 2
+  ENTITY = 3
+  FGFX = 4
+  UI = 5
 end

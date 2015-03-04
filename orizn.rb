@@ -1,5 +1,6 @@
 require 'gosu'
 
+require_relative 'lib/entity'
 require_relative 'lib/player'
 require_relative 'lib/bullet'
 require_relative 'lib/scene'

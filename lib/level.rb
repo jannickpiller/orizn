@@ -13,13 +13,14 @@ class Level < Scene
     @score      = 0
     @player     = Player.new(window)
     @bullets    = Array.new(5) { PlayerBullet.new(@player, window) }
-    @enemies    = Array.new(5) { Enemy.new(window, @player) } 
+    @enemies    = Array.new(15) { Enemy.new(window, @player) } 
     @gameover   = false
     
-    @player.warp(400, 500)
+    @player.warp
     @player.load_bullets(@bullets)
     
     @enemies.each { |enemy|
+      enemy.warp
       enemy.bullets = Array.new(5) { EnemyBullet.new(enemy, window) } 
       enemy.load_bullets(enemy.bullets) 
     }  
@@ -59,11 +60,13 @@ class Level < Scene
     unless @enemies.empty? or @player.health == 0
       @player.update
       @bullets.each { |bullet| bullet.update }
+      
       @player.touched_by? @enemies
       
       @enemies.each do |enemy|
         enemy.update
         enemy.bullets.each { |bullet| bullet.update }
+        
         @player.hit_by? enemy.bullets
          
         if enemy.hit_by?(@bullets)
@@ -73,7 +76,11 @@ class Level < Scene
       
         if enemy.y > @window.width
           @enemies.delete(enemy)
-          @score -=1
+          unless @score == 0
+            @score -=1
+          else
+            @score = 0
+          end
         end
         
         if (enemy.x - @player.x).abs < 150 and enemy.y >= -5

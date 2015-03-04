@@ -1,29 +1,24 @@
-class Player
-  attr_reader :x, :y, :health
+class Player < Entity
+  attr_reader :health
   
   def initialize(window)
-    @window = window
+    super(window)
     @ship   = Gosu::Image.new(window, 'media/ships/player.png', false)
     @energy = Gosu::Image.new(window, 'media/gfx/glow.png', false)
-    @health = 100
-    @x      = 0
-    @y      = 0
+    @health = 10
   end
   
-  def warp(x, y)
-    @x, @y = x, y
+  def warp
+    @x = 400
+    @y = 500
   end
   
-  def load_bullets(bullets)
-    @bullets = bullets
-  end
-  
-  def hit_by?(bullets)
-    @hit = bullets.any? { |bullet| Gosu::distance(bullet.x, bullet.y, @x, @y) < 30 }
-    @bullet = bullets.find { |bullet| bullet.shot }
-    if @hit and @bullet
-      @health -= 10
-      @bullet.shot = false
+  def touched_by?(enemies)
+    @touched = enemies.any? { |enemy| Gosu::distance(enemy.x, enemy.y, @x, @y) < 10 }
+    @enemy = enemies.find { |enemy| Gosu::distance(enemy.x, enemy.y, @x, @y) < 10 }
+    if @touched
+      @health -= 1
+      enemies.delete(@enemy)
     end
   end
   
@@ -47,27 +42,12 @@ class Player
     @y = 40 if @y <= 40
   end
   
-  def shoot
-    bullet = @bullets.find { |bullet| not bullet.shot } 
-    if bullet
-      bullet.shot = true
-      bullet.sample.play
-    end
-  end
-  
-  def touched_by?(enemies)
-    @touched = enemies.any? { |enemy| Gosu::distance(enemy.x, enemy.y, @x, @y) < 15 }
-    if @touched
-      @health -= 1
-    end
-  end
-  
   def button_down(id)
     shoot if id == Gosu::KbSpace
   end
   
   def draw
-    @ship.draw_rot(@x, @y, PLAYER, 0, 0.5, 0.5, 0.5, 0.5)
+    super
     @energy.draw_rot(@x, @y+10, BGFX, 0.5, 0.5, 0.4, 0.4)
   end
   

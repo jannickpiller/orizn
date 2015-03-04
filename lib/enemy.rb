@@ -1,20 +1,22 @@
-class Enemy
-  attr_reader :x, :y, :shot
-  attr_accessor :bullets
+class Enemy < Entity
+  attr_reader :shot
+  attr_accessor :bullets, :health
   
   def initialize(window, player)
-    @window  = window
+    super(window)
     @ship    = Gosu::Image.new(window, 'media/ships/enemy.png', false)
     @hit     = false
     @health  = 2
+    @player  = player
+    @delay   = 0
+    @bullets = []
+  end
+  
+  def warp
     @x       = rand(@window.width)
     @x       = 770 if @x >= 770
     @x       = 30 if @x <= 30
-    @y       = rand(-2500..0)
-    @player  = player
-    @delay   = 0
-    @init    = true
-    @bullets = []
+    @y       = rand(-3000..0)
   end
   
   def hit_by?(bullets)
@@ -25,20 +27,9 @@ class Enemy
       @bullet.shot = false
       if @health == 0
         @health = 2
-        reset_position
+        warp
       end
     end
-  end
-  
-  def reset_position
-    @x = rand(@window.width)
-    @x = 770 if @x >= 770
-    @x = 30 if @x <= 30
-    @y = rand(-500..0)
-  end
-  
-  def load_bullets(bullets)
-    @bullets = bullets
   end
   
   def shoot
@@ -52,20 +43,12 @@ class Enemy
   end
   
   def update
-    #if @health > 0
     @delay -= 1
     @y += 3
-    #if @y > @window.width or @health == 0
-     # reset_position
-    # end
-    # if @x < @player.x
-      #@x += 1
-      #else
-      #@x -= 1
-      #end  
-  end
-    
-  def draw
-    @ship.draw_rot(@x, @y, ENEMY, 0, 0.5, 0.5, 0.5, 0.5)
+    if @x < @player.x
+      @x += 0.45
+    else
+      @x -= 0.45
+    end  
   end
 end
